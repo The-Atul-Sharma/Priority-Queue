@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {HashRouter, Route, Redirect} from 'react-router-dom';
 import {firebaseApp, auth, provider} from './Firebase';
 import Dashboard from './components/Dashboard'
+import Login from './components/Login'
 
 class App extends Component {
 
@@ -54,24 +55,31 @@ class App extends Component {
     render() {
         return (
             <HashRouter>
-                <div className="app">
-                    <nav className="navbar navbar-default navbar-fixed-top">
-                        <a className="navbar-brand">Priority Queue</a> 
-                        <a>{this.state.authed ?
-                            <button className="login btn btn-primary" onClick={this.logout}>Log Out</button>                
-                            :
-                            <button className="login btn btn-primary" onClick={this.login}>Log In</button>              
-                        }</a>
-                    </nav>
-                    {!this.state.authed ? <div className="container info-text"><h4>Please login for use this app.</h4>
-                    </div> : ''}
-                     <div>
-                         <Route path='/' render={()=>this.state.authed ? <Redirect to='/dashboard'/> : <div></div>}/>
-                         <Route path='/dashboard'
-                                render={()=>this.state.authed ?
-                                    <Dashboard userid={this.state.userid} email={this.state.email}/> :
-                                    <Redirect to='/'/>}/>
-                    </div>
+                <div>
+                    {!this.state.authed ?
+                        <div className="login-screen">
+                            <Login login={this.login}></Login>
+                        </div>:
+                        <div className="app">
+                            <nav className="navbar navbar-default navbar-fixed-top">
+                                <a className="navbar-brand">Priority Queue</a> 
+                                <a>{this.state.authed ?
+                                    <button className="login btn btn-primary" onClick={this.logout}>Log Out</button>                
+                                    :
+                                    <button className="login btn btn-primary" onClick={this.login}>Log In</button>              
+                                }</a>
+                            </nav>
+                            {!this.state.authed ? <div className="container info-text"><h4>Please login for use this app.</h4>
+                            </div> : ''}
+                            <div>
+                                <Route path='/' render={()=>this.state.authed ? <Redirect to='/dashboard'/> : <div></div>}/>
+                                <Route path='/dashboard'
+                                        render={()=>this.state.authed ?
+                                            <Dashboard userid={this.state.userid} email={this.state.email}/> :
+                                            <Redirect to='/'/>}/>
+                            </div>
+                        </div>
+                    }
                 </div>
             </HashRouter>
         );
