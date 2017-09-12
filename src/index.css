@@ -73,9 +73,11 @@
 }
 
 .login-screen {
-    /* top: 45%; */
-    /* left: 47%; */
-    /* position: absolute; */
+  width: 100%;
+  height: 100vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Shared */
@@ -92,9 +94,9 @@
   border-radius: 0.2em;
   font-size: 16px;
   color: #FFF;
-  top: 47%;
-  left: 43%;
-  position: absolute
+  /* top: 40%;
+  left: 43%; */
+  /* position: absolute */
 }
 .loginBtn:before {
   content: "";

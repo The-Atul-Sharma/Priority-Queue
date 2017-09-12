@@ -8,7 +8,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div>
                 <button className="loginBtn loginBtn--google" onClick={this.props.login}>  Login with Google
 </button>
             </div>
